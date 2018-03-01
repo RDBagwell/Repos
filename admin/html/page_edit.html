@@ -1,0 +1,9 @@
+<div id="vp_list">
+	<a class="add" href="/admin/index.php?a=page_add">Add Page</a>
+	<p>Edit Page</p>
+	<ul>
+	<?php foreach ($page_list as $page) { ?>
+		<li><a href="/admin/index.php?a=edit_page&pid=<?=$page['pid']?>"><?=$page["title"]?></a></li>
+	<?php }?>	
+	</ul>
+</div>

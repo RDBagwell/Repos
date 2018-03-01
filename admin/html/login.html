@@ -1,0 +1,13 @@
+<div>
+    <h1>Login</h1>
+    <div id="error">
+        <?=$responce?>
+    </div>
+    <form action="/admin/login.php" method="post" name="Login">
+        <label for="user_name">Username:</label>
+        <input type="text" name="user_name" id="user_name" value="<?=$_POST['user_name']?>">
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+        <button type="submit">Login</button>
+    </form>
+</div>

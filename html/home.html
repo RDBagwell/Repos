@@ -1,0 +1,47 @@
+    <div class="col-sm-8 text-left"> 
+        <h1>Welcome</h1>
+            <p>Welcome to Chaos Adrenaline. A new side project by Casey Allred (creator of 4kyeah.com)
+On this page, we hope to have some fun with games and miscellaneous activities around the Salt Lake City area. Things like ComiCon, Oktoberfest, FearCon, concerts, and other things of that nature. We also hope to develop some table top games via Kickstarter. The site is new, so be patient with us as we develop and really find out what it is this site will be. Thanks for visiting, and don't forget to check out our Facebook page and YouTube channel.</p>
+            <hr>
+            <h2>Recent Video</h2>
+            <h3><?=$recent_video["video_title"]?></h3>
+            <div title="<?=$recent_video['video_title']?>: <?=$recent_video['video_description']?>" class="video-container">
+                <iframe  width="560" height="315" src="https://www.youtube.com/embed/<?=$recent_video['video_code']?>" frameborder="0" allowfullscreen></iframe> 
+            </div>
+            <p><?=$recent_video["video_description"]?></p>
+            <hr>
+            <h2>Recent Podcasts</h2>
+                <h3><?=$recent_podcast["podcast_title"]?></h3>
+                <div title="<?=$recent_podcast['podcast_title']?>: <?=$recent_podcast['podcast_description']?>" class="video-container">
+                    <iframe  width="560" height="315" src="https://app.stitcher.com/splayer/f/69758/<?=$recent_podcast['podcast_code']?>" frameborder="0" allowfullscreen></iframe> 
+                </div>
+                <p><?=$recent_podcast["podcast_description"]?></p>
+            <hr>
+            <h2>News and Updates</h2>
+            <?php foreach ($news as $post) { $old_date_timestamp = strtotime($post["date_added"]) ?>
+                <div class="news_post_contanter">
+                    <div class="news_date"><?=date('m-d-Y',$old_date_timestamp)?>:</div>
+                    <h4 class="news_title"><?=$post['title']?></h4>
+                    <p class="news_post"><?=$post['post']?></p>
+                    <?php if($post["thumbnail"] != ""){?>
+                        <div class="news_image"><img src="images/news_and_events_tumbs/<?=$post['thumbnail']?>" /></div>
+                    <?php } else{ ?>
+                        <div class="news_image"><img src="images/news_and_events_tumbs/NewsPlaceholder.jpg" /></div>
+                    <?php } ?>  
+                </div>    
+            <?php }?>
+            <hr>
+            <h2>Upcoming Events</h2>
+            <?php foreach ($events as $post) { $old_date_timestamp = strtotime($post["date"]) ?>
+                <div class="events_post_contanter">
+                    <div class="events_date"><?=date('m-d-Y',$old_date_timestamp)?>:</div>
+                    <h4 class="events_title"><?=$post['title']?></h4>
+                    <p class="events_post"><?=$post['post']?></p>
+                    <?php if($post["thumbnail"] != ""){?>
+                        <div class="events_image"><img src="images/news_and_events_tumbs/<?=$post['thumbnail']?>" /></div>
+                    <?php } else{ ?>
+                        <div class="events_image"><img src="images/news_and_events_tumbs/NewsPlaceholder.jpg" /></div>
+                    <?php } ?>
+                </div>    
+            <?php }?>
+    </div>

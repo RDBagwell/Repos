@@ -1,0 +1,15 @@
+<?php foreach ($records as $record) { $old_date_timestamp = strtotime($record["date_added"]); ?>
+<div class="archive">
+    <a title="<?=$recent_video['video_title']?>: <?=$recent_video['video_description']?>" href="<?=$record['title']?>">
+    <?php if($record["image"] != ""){?>
+		<img style="float: left;" src="images/uploads_thumbs/<?=$record['image']?>" alt="<?=$record['title']?>"/>
+   	<?php } else{ ?>
+        <img style="float: left;" src="images/uploads_thumbs/ArchivePlaceholder.jpg" alt="<?=$record['title']?>"/>
+     <?php } ?>   
+        <div class="archive_title"><?=$record["title"]?>: </div>
+        <div class="archive_date"><?=date('m-d-Y',$old_date_timestamp)?></div>
+    </a>     
+</div>
+<p class="archive_category"><?=$record["category"]?></p>
+<hr>
+<?php }?>

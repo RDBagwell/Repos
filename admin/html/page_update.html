@@ -1,0 +1,37 @@
+<div>
+    <h3>Edit Page</h3>
+    <form action="index.php?a=page_upload" method="post" name="page_update">
+        <input type="hidden" name="pe" value="<?=$pe?>" id="pe">
+        <input type="hidden" name="pid" value="<?=$page_record[0]['pid']?>" id="pid">
+        <div class="form_input">
+            <label for="title">Title:</label><br>
+            <input type="text" name="title" value="<?=$page_record[0]['title']?>" id="title">    
+        </div>
+        <div class="form_input">
+            <label for="content">Content:</label><br>
+            <textarea class="tinymce" name="content" id="content"><?=$page_record[0]['content']?></textarea>
+        </div>
+        <div class="form_input">
+            <label for="meta_title">Meta Title</label><br>
+            <input type="text" name="meta_title" value="<?=$page_record[0]['meta_title']?>" id="meta_title"> 
+        </div>
+        <div class="form_input">
+            <label for="meta_description">Meta Description</label><br>
+            <input type="text" name="meta_description" value="<?=$page_record[0]['meta_description']?>" id="meta_description">
+        </div>
+        <div class="form_input">
+            <label for="category">Menu:</label><br>
+            <select name='menu' id="menu">
+                <option value='Top' <?php if($page_record[0]['menu'] == "Top") echo "selected"; ?> >Top</option>
+                <option value='Bottom' <?php if($page_record[0]['menu'] == "Bottom") echo "selected"; ?> >Bottom</option>
+                <option value='Both' <?php if($page_record[0]['menu'] == "Both") echo "selected"; ?> >Both</option>
+                <option value='None' <?php if($page_record[0]['menu'] == "None") echo "selected"; ?> >None</option>             
+            </select>
+        </div>
+        <div class="form_input">
+            <button type="submit">Upload</button>
+        </div>
+    </form>
+</div>
+<!-- javascript -->
+

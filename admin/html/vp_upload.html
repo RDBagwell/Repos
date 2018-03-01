@@ -1,0 +1,37 @@
+<div>
+    <h3>Video/Podcast Upload</h3>
+    <form action="index.php?a=vp_upload" method="post" name="vp_upload" enctype="multipart/form-data">
+        <input type="hidden" name="vp" value="<?=$vp?>" id="vp">
+        <input type="hidden" name="vid" value="<?=$upload_record[0]['vid']?>" id="vid">
+        <div class="form_input">
+            <label for="title">Title:</label><br>
+            <input type="text" name="title" id="title" value="<?=$upload_record[0]['title']?>">    
+        </div>
+        <div class="form_input">
+            <label for="video_code">Video Code:</label><br>
+            <input type="text" name="video_code" id="video_code" value="<?=$upload_record[0]['video_code']?>">
+        </div>
+        <div class="form_input">
+            <label for="description">Description:</label><br>
+            <textarea name="description" id="description"><?=$upload_record[0]['description']?></textarea>
+        </div>
+        <div class="form_input">
+            <label for="tags">Tags:</label><br>
+            <input type="text" name="tags" id="tags" value="<?=$upload_record[0]['tags']?>">
+        </div>
+        <div class="form_input">
+            <label for="category">Category:</label><br>
+            <select name='category' id="category">
+                <option value='Video' <?php if($upload_record[0]['category'] == "Video") echo "selected"; ?> >Video</option>
+                <option value='Podcast' <?php if($upload_record[0]['category'] == "Podcast") echo "selected"; ?> >Podcast</option>
+            </select>
+        </div>
+        <div class="form_input">
+            <label for="image">Upload Thumbnail:</label><br>
+             <input type="file" name="image" id="image" value="<?=$upload_record[0]['image']?>" />
+        </div>
+        <div class="form_input">
+            <button type="submit">Upload</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,9 @@
+<div id="vp_list">
+	<a class="add" href="/admin/index.php?a=vp_add">Upload Video/Podcast</a>
+	<p>Edit Video/Podcast</p>
+	<ul>
+	<?php foreach ($uploads as $upload) { ?>
+		<li><a href="/admin/index.php?a=vp_edit&vid=<?=$upload['vid']?>"><?=$upload["title"]?></a></li>
+	<?php }?>	
+	</ul>
+</div>

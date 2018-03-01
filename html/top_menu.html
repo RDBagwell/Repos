@@ -1,0 +1,7 @@
+<?php foreach ($top as $record) { ?>
+    <?php if($record["is_active"] == 1){ ?>
+        <?php if($record["parent"] == 0){ ?>
+            <li><a href="index.php?p=<?=$record['name']?>"><?=$record['title']?></a></li>
+        <?php } ?>
+    <?php } ?>
+<?php } ?>

@@ -1,0 +1,29 @@
+<div>
+    <h3>News And Events</h3>
+    <form action="index.php?a=ne_upload" method="post" name="ne_upload" enctype="multipart/form-data">
+        <input type="hidden" name="ne" value="<?=$ne?>" id="ne">
+        <input type="hidden" name="neid" value="<?=$record[0]['neid']?>" id="neid">
+        <div class="form_input">
+            <label for="title">Title:</label><br>
+            <input type="text" name="title" id="title" value="<?=$record[0]['title']?>">    
+        </div>
+        <div class="form_input">
+            <label for="post">Post:</label><br>
+            <textarea class="tinymce" name="post" id="post"><?=$record[0]['post']?></textarea>
+        </div>
+        <div class="form_input">
+            <label for="category">Category:</label><br>
+            <select name='category' id="category">
+                <option value='News' <?php if($record[0]['category'] == "News") echo "selected"; ?> >News</option>
+                <option value='Event' <?php if($record[0]['category'] == "Event") echo "selected"; ?> >Event</option>
+            </select>
+        </div>
+        <div class="form_input">
+            <label for="image">Upload Thumbnail:</label><br>
+             <input type="file" name="image" id="image" />
+        </div>
+        <div class="form_input">
+            <button type="submit">Upload</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,9 @@
+<div id="ne_list">
+	<a class="add" href="/admin/index.php?a=ne_add">Add News/Events</a>
+	<p>Edit News/Event</p>
+	<ul>
+	<?php foreach ($news_events_records as $records) { ?>
+		<li><a href="/admin/index.php?a=ne_edit&neid=<?=$records['neid']?>"><?=$records["title"]?></a></li>
+	<?php }?>	
+	</ul>
+</div>

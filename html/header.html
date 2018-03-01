@@ -1,0 +1,35 @@
+    
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>                        
+                </button>
+                <a class="navbar-brand" href="index.php?p=home"><img src="images/LogoC.png" alt="Logo"/></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+<!--                <div class="navbar-social">
+                    <div class="social">
+                        <span class="fb"><a href="#"><img src="images/Facebook.png" alt="Logo"/></a></span>
+                        <span class="yt"><a href="#"><img src="images/YouTube.png" alt="Logo"/></a></span>
+                        <span class="em"><a href="#"><img src="images/Email.png" alt="Logo"/></a></span>                         
+                    </div>
+                </div>-->
+                <div id="needel"></div>
+                <ul class="nav navbar-nav">
+                    
+                    <li>
+                        <form>
+                            <input id="search" name="search" type="text" >
+                        </form>
+                    </li>
+                    <?php require_once('./public/public_top_menu.php');  ?>
+                    <li><a href="index.php?p=videos">Videos</a></li>
+                    <li><a href="index.php?p=podcast">Podcast</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>

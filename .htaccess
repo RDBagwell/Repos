@@ -1,0 +1,12 @@
+#Options +FollowSymLinks
+#RewriteEngine On
+
+# Allow any files or directories that exist to be displayed directly
+#RewriteCond %{REQUEST_FILENAME} !-f 
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule ^(inc|css|img|js)($|/) - [L]
+#RewriteCond %{REQUEST_URI} "/css/" [OR]
+#RewriteCond %{REQUEST_URI} "/img/"
+#RewriteCond %{REQUEST_URI} !^/css
+
+#RewriteRule ^(.+)$ index.php?p=$1
