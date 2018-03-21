@@ -31,12 +31,15 @@
 
         public function set_file($file) {
 
-        	if (empty($file || !$file || !is_array($file))) {
+        	if (empty($file) || !$file || !is_array($file)) {
         		$this->errors[] = "No file was uploaded.";
         		return false;
-        	}elseif ($file['error'] != 0) {
+
+        	} elseif ($file['error'] != 0) {
+
         		$this->errors[] = $this->upload_errors[$file['error']];
         		return false;
+
         	} else {
 				$this->filename = basename($file['name']);
 	        	$this->tmp_path = $file['tmp_name'];
