@@ -4,7 +4,20 @@
 	*/
 	class Db_object
 	{
-		
+		// file upload constants 
+		public $tmp_path;
+		public $errors = array();
+		public $upload_errors = array(
+	        UPLOAD_ERR_OK => "File submited.",
+	        UPLOAD_ERR_INI_SIZE => "The uploaded file exceeds the upload_max_filesize directive in php.ini.",
+	        UPLOAD_ERR_FORM_SIZE => "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.",
+	        UPLOAD_ERR_PARTIAL => "The uploaded file was only partially uploaded.",
+	        UPLOAD_ERR_NO_FILE => "No file was uploaded.",
+	        UPLOAD_ERR_NO_TMP_DIR => "Missing a temporary folder.",
+	        UPLOAD_ERR_CANT_WRITE => "Failed to write file to disk.",
+	        UPLOAD_ERR_EXTENSION => "A PHP extension stopped the file upload."
+        );
+
 		//Get all from DB
 		public static function get_all(){
 			return static::set_query("SELECT * FROM ".static::$db_table);
@@ -16,6 +29,13 @@
 			//Check if there is a result if not return false
 			return !empty($result_array) ? array_shift($result_array) : false;
 		}
+
+		// //Get all from DB by id 
+		// public static function get_by_id($id, $id_column_name){
+		// 	$result_array = static::set_query("SELECT * FROM ".static::$db_table." WHERE {$id_column_name} = $id");
+		// 	//Check if there is a result if not return false
+		// 	return !empty($result_array) ? array_shift($result_array) : false;
+		// }
 
 		//Runs a MySQL query using the database class.
 		public static function set_query($sql){
@@ -82,6 +102,24 @@
 
 		}
 
+		//uplod a file to the serevr 
+		public function set_file($file) {
+        	if (empty($file) || !$file || !is_array($file)) {
+        		$this->errors[] = "No file was uploaded.";
+        		return false;
+        	} elseif ($file['error'] != 0) {
+        		$this->errors[] = $this->upload_errors[$file['error']];
+        		return false;
+        	} else {
+				$this->filename = basename($file['name']);
+	        	$this->tmp_path = $file['tmp_name'];
+	        	$this->type = $file['type'];
+	        	$this->size = $file['size'];
+
+        	}
+			
+        }
+
 		// Cheakcs if is id is in DB. Updates if is Creates if not
 		public function save(){
 
@@ -123,18 +161,16 @@
 			$sql .= $database->escape_string($this->id).";";
 
 			$database->query($sql);
-			return (mysql_affected_rows($database->connection) == 1) ? true : false;
+			return (mysqli_affected_rows($database->connection) == 1) ? true : false;
 		}
 
 		public function delete(){
 			global $database;
-
 			$sql = "DELETE FROM ".static::$db_table;
 			$sql .=" WHERE id = ";
 			$sql .= $database->escape_string($this->id).";";
-
 			$database->query($sql);
-			return (mysql_affected_rows($database->connection) == 1) ? true : false;
+			return (mysqli_affected_rows($database->connection) == 1) ? true : false;
 		}
 
 

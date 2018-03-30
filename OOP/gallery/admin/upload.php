@@ -1,31 +1,23 @@
 <?php
 
     include("includes/header.php"); 
+    if (!$session->is_signed_in()) { redirect("login.php"); }
 
     if (isset($_POST['submit'])) {
-        $file_upload = $_FILES['file_upload'];
-        $file_err = $file_upload['error'];
-        $file_tmp_name = $file_upload['tmp_name'];
-        $file_name = $file_upload['name'];
-        $directory = "uploads";
-
-        $upload_errors = array(
-            UPLOAD_ERR_OK => "File submited.",
-            UPLOAD_ERR_INI_SIZE => "The uploaded file exceeds the upload_max_filesize directive in php.ini.",
-            UPLOAD_ERR_FORM_SIZE => "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.",
-            UPLOAD_ERR_PARTIAL => "The uploaded file was only partially uploaded.",
-            UPLOAD_ERR_NO_FILE => "No file was uploaded.",
-            UPLOAD_ERR_NO_TMP_DIR => "Missing a temporary folder.",
-            UPLOAD_ERR_CANT_WRITE => "Failed to write file to disk.",
-            UPLOAD_ERR_EXTENSION => "A PHP extension stopped the file upload."
-        );
-
-        $error_message = $upload_errors[$file_err];
-        
-
-
-
+        $photo = new Photo();
+        $photo->title = $_POST['title'];
+        $photo->description = $_POST['description'];
+        $photo->caption = $_POST['caption']; 
+        $photo->alt_text = $_POST['alt_text'];
+        $photo->set_file($_FILES['file_upload']);
+        $message = "";
+        if($photo->save_photo()){
+            $message = "Photo uploaded successfuly!";
+        } else {
+            $message = join("<br>", $photo->errors);
+        }
     }
+
 ?>
 
         <!-- Navigation -->
@@ -41,44 +33,42 @@
             <div class="container-fluid">
                 <!-- Page Heading -->
                 <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Uploads
-                            <small>Subheading</small>
-                        </h1>
-                        <ol class="breadcrumb">
-                            <li>
-                                <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-file"></i> Blank Page
-                            </li>
-                        </ol>
+                    <h1 class="page-header">
+                            Upload Photos
+                    </h1>
+                    <div class="col-md-12">      
+                            <div class="col-md-6 col-md-offset-3">
+                                <h4><?=$message?></h4>
+                                <hr>                  
+                                <form action="upload.php" enctype="multipart/form-data" method="post">
+                                    <div class="form-group">
+                                        <label>Photo title</label><br>
+                                        <input class="form-control" type="text" name="title">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Caption</label><br>
+                                        <input class="form-control" type="text" name="caption">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Alt Text</label><br>
+                                        <input class="form-control" type="text" name="alt_text">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Photo description</label><br>
+                                        <textarea class="form-control" type="text" name="description" cols="30" rows="10"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Select file to upload</label><br>
+                                        <input type="file" name="file_upload">
+                                    </div>
+                                        <input class="btn btn-primary pull-right" type="submit" name="submit" value="Upload">
+                                </form>
+                            </div>
                     </div>
                 </div>
                 <!-- /.row -->
             </div>
-                <div class="form">
-                    <?php 
 
-
-                        if (!empty($error_message)) {
-                            if (move_uploaded_file($file_tmp_name, $directory."/".$file_name)) {
-                                echo "<div>";
-                                    echo "<h3>File uploaded successfuly</h3>";
-                                echo "</div>";
-                            } else{
-                                echo "<div>";
-                                    print_r("<h3>".$error_message."</h3>");
-                                echo "</div>";
-                            }
-                        }
-                    ?>                    
-                    <form action="upload.php" enctype="multipart/form-data" method="post">
-                        <input type="file" name="file_upload"><br>
-                        <input type="submit" name="submit">
-                    </form>
-                </div>
             <!-- /.container-fluid -->
         </div>
         <!-- /#page-wrapper -->

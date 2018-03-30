@@ -1,7 +1,15 @@
 <?php 
     include("includes/header.php");
     if (!$session->is_signed_in()) { redirect("login.php"); }
-    $comments = Comment::get_all();
+
+    if (empty($_GET['id'])) {
+        redirect("photos.php");
+    } else {
+        $comments = Comment::find_comment($_GET['id']);
+        
+    }
+
+
 ?>
 
         <!-- Navigation -->

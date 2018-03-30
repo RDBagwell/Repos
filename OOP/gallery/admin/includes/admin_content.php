@@ -17,9 +17,11 @@
                                 //     echo $photo->title." ".$photo->description."<br>";
                                 // }
 
-                                // //Get user by id
-                                // $echo_result = User::get_by_id(1);
-                                // echo $echo_result->username;
+                                //Get user by id
+                                // $echo_result = User::get_by_id(1, "id");
+                                // echo "<pre>";
+                                //     print_r($echo_result);
+                                // echo "<pre>";
 
 
                                 //Create User

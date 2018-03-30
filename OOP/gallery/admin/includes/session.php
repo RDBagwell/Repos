@@ -15,7 +15,6 @@ class Session{
 	}
 
 	public function is_signed_in(){
-		echo $this->signed_in;
 		return $this->signed_in;
 	}
 
